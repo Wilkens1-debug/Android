@@ -1,0 +1,261 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'CV App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: GroupScreen(group: 'Gwoup 8'),
+    );
+  }
+}
+
+class GroupScreen extends StatelessWidget {
+  final String group;
+  final List<String> students = [
+    'Amazan Ricardo',
+    'Badio Wilkens',
+    'Dory Elishama',
+    'Ovide Samuel',
+    'Saint-Martin Kalancia',
+  ];
+
+  GroupScreen({required this.group});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Lis etidyan yo pou $group'),
+      ),
+      body: ListView.builder(
+        itemCount: students.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(students[index]),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(
+                    group: group,
+                    member: students[index],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  final String group;
+  final String member;
+
+  DetailScreen({required this.group, required this.member});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(member),
+      ),
+      body: ListView(
+        children: [
+          ListTile(
+            title: Text('Personal Information'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PersonalInfoScreen(group: group, member: member),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Academic Background'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AcademicInfoScreen(group: group, member: member),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PersonalInfoScreen extends StatelessWidget {
+  final String group;
+  final String member;
+
+  PersonalInfoScreen({required this.group, required this.member});
+
+  @override
+  Widget build(BuildContext context) {
+    String name = member;
+    String dateOfBirth;
+    String address;
+    String phoneNumber;
+
+    
+    switch (member) {
+      case 'Amazan Ricardo':
+        dateOfBirth = '23 novanm 1999';
+        address = '12, imp.Lespinasse';
+        phoneNumber = '31323334';
+        break;
+      case 'Badio Wilkens':
+        dateOfBirth = '2 Oktob 2000';
+        address = '11, imp. Victor';
+        phoneNumber = '34333231';
+        break;
+      case 'Dory Elishama':
+        dateOfBirth = '15 jiye 1998';
+        address = 'Kafoufey';
+        phoneNumber = '37393238';
+        break;
+      case 'Ovide Samuel':
+        dateOfBirth = '10 Desanm 2000';
+        address = '40, Vilage Solidarite';
+        phoneNumber = '33343231';
+        break;
+      case 'Saint-Martin Kalancia':
+        dateOfBirth = '20 Oktob 2001';
+        address = '121, imp. charles';
+        phoneNumber = '34353637';
+        break;
+      default:
+        dateOfBirth = 'N/A';
+        address = 'N/A';
+        phoneNumber = 'N/A';
+        break;
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Personal Information - $member'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Non: $name',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Dat nesans: $dateOfBirth',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Adrès: $address',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Telefon: $phoneNumber',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AcademicInfoScreen extends StatelessWidget {
+  final String group;
+  final String member;
+
+  AcademicInfoScreen({required this.group, required this.member});
+
+  @override
+  Widget build(BuildContext context) {
+    String school;
+    String year;
+    String degree;
+
+    
+    switch (member) {
+      case 'Amazan Ricardo':
+        school = 'Ecole superieure Infrotonique d\'Haiti';
+        year = '2020 - 2024';
+        degree = 'Informatique et Réseaux';
+        break;
+      case 'Badio Wilkens':
+        school = 'Ecole superieure Infrotonique d\'Haiti';
+        year = '2020 - 2024';
+        degree = 'Informatique et Réseaux';
+        break;
+      case 'Dory Elishama':
+        school = 'Ecole superieure Infrotonique d\'Haiti';
+        year = '2020 - 2024';
+        degree = 'Informatique et Réseaux';
+        break;  
+      case 'Ovide Samuel':
+        school = 'Ecole superieure Infrotonique d\'Haiti';
+        year = '2020 - 2024';
+        degree = 'Informatique et Réseaux';
+        break;
+      case 'Saint-Martin Kalancia':
+        school = 'Ecole superieure Infrotonique d\'Haiti';
+        year = '2020 - 2024';
+        degree = 'Informatique et Réseaux';
+        break;
+      default:
+        school = 'N/A';
+        year = 'N/A';
+        degree = 'N/A';
+        break;
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Academic Background - $member'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Lekòl: $school',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Ane: $year',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Diplòm: $degree',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+//
